@@ -42,9 +42,23 @@ class Airplane {
 */
 
 class Person {
-  
-}
-
+  constructor (name, age){
+    this.name = name;
+    this.age = age;
+    this.stomach = []
+  }
+  poop(){
+    this.stomach = []
+  }
+  eat(food){
+    if (this.stomach.length < 10){
+      this.stomach.push(food);
+    }
+  }
+  toString(){
+    return `${this.name}, ${this.age}`
+  }
+} 
 /*
   TASK 2
     - Write a Car class whose constructor initializes `model` and `milesPerGallon` from arguments.
@@ -60,9 +74,27 @@ class Person {
 */
 
 class Car {
-  
+  constructor(model,milesPerGallon){
+    this.model = model
+    this.milesPerGallon = milesPerGallon
+    this.tank = 0
+    this.odometer = 0
+  }
+  fill(gallons){
+    this.tank += gallons
+  }
+  drive(distance){
+    if (distance / this.milesPerGallon <= this.tank ){
+    this.odometer += distance;
+    this.tank = this.tank - distance / this.milesPerGallon;
+    }else {
+    let drivableMiles = this.milesPerGallon * this.tank;
+    this.odometer += drivableMiles;
+    this.tank = 0;
+    return `I ran out of fuel at ${this.odometer} miles!`
+    }
+  }
 }
-
 /*
   TASK 3
     - Write a Lambdasian class.
@@ -76,9 +108,15 @@ class Car {
         + {name} and {location} of course come from the instance's own properties.
 */
 class Lambdasian {
-  
+  constructor(singleArg){
+    this.name = singleArg.name;
+    this.age = singleArg.age;
+    this.location = singleArg.location;
+  }
+  speak(){
+    return `Hello my name is ${this.name}, I am from ${this.location}`
+  }
 }
-
 /*
   TASK 4
     - Write an Instructor class extending Lambdasian.
@@ -94,8 +132,26 @@ class Lambdasian {
         + `grade` receives a `student` object and a `subject` string as arguments and returns '{student.name} receives a perfect score on {subject}'
 */
 class Instructor {
-
+  constructor(arg){
+    this.Lambdasian = arg.Lambdasian
+    this.name = arg.name;
+    this.age = arg.age;
+    this.location = arg.location;
+    this.specialty = arg.specialty;
+    this.favLanguage = arg.favLanguage;
+    this.catchPhrase = arg.catchPhrase;
+  }
+  speak(){
+    return `Hello my name is ${this.name}, I am from ${this.location}`
+  }
+  grade(student,subject){
+    return `${student.name} receives a perfect score on ${subject}`
+  }
+  demo(subject){
+    return `Today we are learning about ${subject}`
+  }
 }
+
 /*
   TASK 5
     - Write a Student class extending Lambdasian.
@@ -112,6 +168,26 @@ class Instructor {
         + `sprintChallenge` similar to PRAssignment but returns `student.name has begun sprint challenge on {subject}`
 */
 class Student {
+  constructor(arg){
+    this.name = arg.name;
+    this.age = arg.age;
+    this.location = arg.location;
+    this.previousBackground = arg.previousBackground;
+    this.className = arg.className;
+    this.favSubjects = arg.favSubjects;
+  }
+  speak(){
+    return `Hello my name is ${this.name}, I am from ${this.location}`
+  }
+  listSubjects(){
+    return `Loving ${this.favSubjects}!`
+  }
+  PRAssignment(subject){
+    return `${this.name} has submitted a PR for ${subject}`
+  }
+  sprintChallenge(subject){
+    return `${this.name} has begun sprint challenge on ${subject}`
+  }
    
 }
 
@@ -129,8 +205,34 @@ class Student {
         + `debugsCode` a method that takes in a student object and a subject and returns `{name} debugs {student.name}'s code on {subject}`
 */
 class ProjectManager {
-   
+  constructor(arg){
+    this.Lambdasian = arg.Lambdasian
+    this.name = arg.name;
+    this.age = arg.age;
+    this.location = arg.location;
+    this.specialty = arg.specialty;
+    this.favLanguage = arg.favLanguage;
+    this.catchPhrase = arg.catchPhrase;
+    this.gradClassName = arg.gradClassName;
+    this.favInstructor = arg.favInstructor;
+   }
+   speak(){
+    return `Hello my name is ${this.name}, I am from ${this.location}`
+  }
+   standUp(slack){
+     return `${this.name} announces to ${slack}, @chanel standy times!`
+   }
+   debugsCode(student, subject){
+     return `${this.name} debugs ${student.name}'s code on ${subject}`
+   }
+   grade(student,subject){
+    return `${student.name} receives a perfect score on ${subject}`
+  }
+  demo(subject){
+    return `Today we are learning about ${subject}`
+  }
 }
+
 /*
   STRETCH PROBLEM (no tests!)
     - Extend the functionality of the Student by adding a prop called grade and setting it equal to a number between 1-100.
